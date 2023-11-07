@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>Categories</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript">
+		function showform(dowhat) {
+			/*
+			* four DIVS: browse, insert, update, delete
+			* this function sets one visible the others not
+			*/
+			if (dowhat == 'insert'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'update'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'delete'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'block';
+			}
+      else if (dowhat == 'all'){
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'block';
+			}
+			else { //by default display browse
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+		}
+    function newCategory() { showform('insert'); }
+    function updateCategory(pid) { showform('update'); }
+    function deleteCategory(pid) { showform ('delete'); }
+    function browseCategory() { showform ('browse'); }
+    function showAll() { showform ('all'); }
+</script>
+</head>
+
+<body onload="browseCategory()">
+<h1>Categories</h1>
+
+[ <a href="index.html">Home</a> | <a href="products.html">Products</a> | <a href="categories.html">Categories</a> | <a href="customers.html">Customers</a> | <a href="employees.html">Employees</a> | <a href="transactions.html">Transactions</a> | <a href="items.html">Transaction Details</a> ]
+
+<div id="browse">
+<p><a href="#" onClick="showAll()">Display all forms</a> </p>
+<table border="1" cellpadding="5">
+  <tr>
+    <th><a href="#" onClick="newCategory()">New</a></th>
+    <th></th>
+    <th>Category ID</th>
+    <th>Category Name</th>
+  </tr>
+  <tr>
+    <td><a href="#" onClick="updateCategory('this.categoryID')">Edit</a></td>
+    <td><a href="#" onclick="deleteCategory('this.categoryID')">Delete</a></td>
+    <td>1</td>
+    <td>Produce</td>
+  </tr>
+  <tr>
+    <td><a href="#" onClick="updateCategory('this.categoryID')">Edit</a></td>
+    <td><a href="#" onclick="deleteCategory('this.categoryID')">Delete</a></td>
+    <td>2</td>
+    <td>Dairy and Eggs</td>
+  </tr>
+  <tr>
+    <td><a href="#" onClick="updateCategory('this.categoryID')">Edit</a></td>
+    <td><a href="#" onclick="deleteCategory('this.categoryID')">Delete</a></td>
+    <td>3</td>
+    <td>Snacks</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</div> <!-- browse -->
+<div id="insert">
+    <form method="POST" id="addCategory">
+        <legend><strong>Add Category</strong></legend>
+          <fieldset class="fields">
+            <label> Category Name </label> <input type="text" name="categoryName">
+      </fieldset>
+          <input class="btn" type="submit" id="addCategory" value="Add Category">
+          <input class="btn" type="button" value="cancel" onClick="browseCategory()">
+	</form> 
+</div><!-- insert -->
+<p>&nbsp;</p>
+<div id="update">
+    <form method="POST" id="updateCategory">
+        <legend><strong>Update Category</strong></legend>
+          <fieldset class="fields">
+          <input type="hidden" name="categoryID" id="updateCategoryID" value="1">
+          <label> ID: </label> 1
+            <label> Category Name </label> <input type="text" name="categoryName" value="Produce">
+      </fieldset>
+          <input class="btn" type="submit" id="UpdateSaveCategory" value="Save Update Category">
+          <input class="btn" type="button" value="cancel" onClick="browseCategory()">
+	</form> 
+</div><!-- update -->
+<p>&nbsp;</p>
+<div id="delete" style="display: block">
+  <form method="POST" id="deleteCategory">
+      <legend><strong>Delete Category</strong></legend>
+          <fieldset class="fields">
+          <p>Are you sure you wish to delete the following?</p>
+          <input type="hidden" name="categoryID" id="deleteCategoryID" value="1">
+          <label><strong>ID:</strong></label> 1
+            <label> <strong>Category Name:</strong> </label> Produce
+            
+    </fieldset>
+    <input class="btn" type="submit" id="deleteCategory" value="Delete Category">
+          <input class="btn" type="button" value="cancel" onClick="browseCategory()">
+  </form> 
+</div><!-- delete -->
+
+</body>
+</html>
