@@ -2,6 +2,7 @@
   <head>
     <title>Transaction Details</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <script language="JavaScript">
         function showform(dowhat) {
             /*
@@ -48,18 +49,36 @@
   </head>
 
   <body onload="browseItemsInTransaction()">
-    <h1>Transaction Details</h1>
-
-    [<a href="index.html">Home</a>
-    <a href="products.html">Products</a>
-    <a href="categories.html">Categories</a>
-    <a href="customers.html">Customers</a>
-    <a href="employees.html">Employees</a>
-    <a href="transactions.html">Transactions</a>
-    <a href="itemsInTransaction.html">Transaction Details</a>]
-
-    <div id="browse">
-        <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+    <header data-bs-theme="dark">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">ExpressMart</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" href="index.html">Home</a>
+              <a class="nav-link" href="products.html">Products</a>
+              <a class="nav-link" href="categories.html">Categories</a>
+              <a class="nav-link" href="customers.html">Customers</a>
+              <a class="nav-link" href="employees.html">Employees</a>
+              <a class="nav-link" href="transactions.html">Transactions</a>
+              <a class="nav-link" href="itemsInTransaction.html">Transaction Details</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section class="py-5 text-center header-container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Items in Transactions</h1>
+          </div>
+        </div>
+      </section>
+      <div id="browse">
         <table border="1" cellpadding="5">
           <tr>
             <th><a href="#" onClick="newItemsInTransaction()">New</a></th>
@@ -137,6 +156,7 @@
         <p>&nbsp;</p>
       </div>
       <!-- browse -->
+      <p><a href="#" onClick="showAll()">Display all forms</a> </p>
   
       <!-- add new detail -->
       <div id="insert" style="display: block">
@@ -156,8 +176,8 @@
               <label for="amount">Amount</label>
               <input type="text" id="amount" name="amount" />
             </fieldset>
-            <input class="btn"type="submit" id="submitTransactionDetail" value="Submit Transaction Detail"/>
-            <input class="btn" type="button" value="Cancel" onClick="browseItemsInTransaction()"/>
+            <input class="btn btn-outline-secondary"type="submit" id="submitTransactionDetail" value="Submit Transaction Detail"/>
+            <input class="btn btn-outline-secondary" type="button" value="Cancel" onClick="browseItemsInTransaction()"/>
           </form>
         </div> 
       <p>&nbsp;</p>
@@ -181,8 +201,8 @@
             <label for="amount">Amount</label>
             <input type="text" id="amount" name="amount" value = "3.50"/>
           </fieldset>
-          <input class="btn" type="submit" id="UpdateTransactionDetail" value="Save Update Transaction Detail"/>
-          <input class="btn" type="button" value="cancel" onClick="browseItemsInTransaction()"/>
+          <input class="btn btn-outline-secondary" type="submit" id="UpdateTransactionDetail" value="Save Update Transaction Detail"/>
+          <input class="btn btn-outline-secondary" type="button" value="cancel" onClick="browseItemsInTransaction()"/>
         </form>
       </div>
       <!-- delete -->
@@ -194,10 +214,11 @@
             <p>Are you sure you wish to delete the following?</p>
             <label>Item Order ID:</label> 5 <label> 
           </fieldset>
-          <input class="btn" type="submit" id="DeleteTransactionDetail" value="Delete Transaction Detail"/>
-          <input class="btn" type="button" value="cancel" onClick="browseItemsInTransaction()"/>
+          <input class="btn btn-outline-secondary" type="submit" id="DeleteTransactionDetail" value="Delete Transaction Detail"/>
+          <input class="btn btn-outline-secondary" type="button" value="cancel" onClick="browseItemsInTransaction()"/>
         </form>
       </div>
+    </main>
   
     </body>
   </html>

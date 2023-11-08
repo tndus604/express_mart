@@ -2,6 +2,7 @@
 <head>
 <title>Products</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
+<link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
 <script language="JavaScript">
 		function showform(dowhat) {
 			/*
@@ -48,150 +49,183 @@
 </head>
 
 <body onload="browseProduct()">
-<h1>Products</h1>
+  <header data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">ExpressMart</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" href="index.html">Home</a>
+            <a class="nav-link" href="products.html">Products</a>
+            <a class="nav-link" href="categories.html">Categories</a>
+            <a class="nav-link" href="customers.html">Customers</a>
+            <a class="nav-link" href="employees.html">Employees</a>
+            <a class="nav-link" href="transactions.html">Transactions</a>
+            <a class="nav-link" href="itemsInTransaction.html">Transaction Details</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="py-5 text-center header-container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">Products</h1>
+        </div>
+      </div>
+    </section>
+    <!-- <h1>Products</h1> -->
 
-[ <a href="index.html">Home</a> | <a href="products.html">Products</a> | <a href="categories.html">Categories</a> | <a href="customers.html">Customers</a> | <a href="employees.html">Employees</a> | <a href="transactions.html">Transactions</a> | <a href="itemsInTransaction.html">Transaction Details</a> ]
+    <div id="browse">
 
-<div id="browse">
-<p><a href="#" onClick="showAll()">Display all forms</a> </p>
-<table border="1" cellpadding="5">
-  <tr>
-    <th><a href="#" onClick="newProduct()">New</a></th>
-    <th></th>
-    <th>Product ID</th>
-    <th>Product Name</th>
-    <th>Unit Price ($)</th>
-    <th>Category ID</th>
-  </tr>
-  <tr>
-    <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
-    <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
-    <td>1</td>
-    <td>Apple</td>
-    <td>0.70</td>
-    <td>1</td>
-  </tr>
-  <tr>
-    <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
-    <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
-    <td>2</td>
-    <td>Dragonfruit</td>
-    <td>2.50</td>
-    <td>1</td>
-  </tr>
-  <tr>
-    <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
-    <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
-    <td>3</td>
-    <td>Potato</td>
-    <td>1.20</td>
-    <td>1</td>
-  </tr>
-  <tr>
-    <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
-    <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
-    <td>4</td>
-    <td>Egg</td>
-    <td>3.00</td>
-    <td>2</td>
-  </tr>
-  <tr>
-    <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
-    <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
-    <td>5</td>
-    <td>Milk</td>
-    <td>3.50</td>
-    <td>2</td>
-  </tr>
-  <tr>
-    <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
-    <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
-    <td>6</td>
-    <td>Cheese</td>
-    <td>1.00</td>
-    <td>2</td>
-  </tr>
-  <tr>
-    <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
-    <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
-    <td>7</td>
-    <td>Pretzel</td>
-    <td>1.60</td>
-    <td>3</td>
-  </tr>
-  <tr>
-    <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
-    <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
-    <td>8</td>
-    <td>Popcorn</td>
-    <td>2.30</td>
-    <td>3</td>
-  </tr>
-  <tr>
-    <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
-    <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
-    <td>9</td>
-    <td>Takis</td>
-    <td>2.50</td>
-    <td>3</td>
-  </tr>
 
-  
-</table>
-<p>&nbsp;</p>
-</div> <!-- browse -->
-<div id="insert">
-    <form method="POST" id="addPlanet">
-        <legend><strong>Add Product</strong></legend>
-          <fieldset class="fields">
-            <label> Product Name </label> <input type="text" name="productName">
-            <label> Unit Price </label> <input type="text" name="unitPrice">
-            <label> Category ID </label> <select name="categoryID">
-            	<option value="0">&nbsp;</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                </select>
-      </fieldset>
-          <input class="btn" type="submit" id="addProduct" value="Add Product">
-          <input class="btn" type="button" value="cancel" onClick="browseProduct()">
-	</form> 
-</div><!-- insert -->
-<p>&nbsp;</p>
-<div id="update">
-    <form method="POST" id="updateProduct">
-        <legend><strong>Update Product</strong></legend>
-          <fieldset class="fields">
-          <input type="hidden" name="productID" id="updateProductID" value="1">
-          <label> ID: </label> 1
-            <label> Product Name </label> <input type="text" name="productName" value="Apple">
-            <label> Unit Price </label> <input type="text" name="unitPrice" value="0.70">
-            <label> Category ID </label> <select name="homeworld">
-            	<option value="0">&nbsp;</option>
-                <option value="1" selected>1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                </select>
-      </fieldset>
-          <input class="btn" type="submit" id="UpdateSaveProduct" value="Save Update Product">
-          <input class="btn" type="button" value="cancel" onClick="browseProduct()">
-	</form> 
-</div><!-- update -->
-<p>&nbsp;</p>
-<div id="delete" style="display: block">
-  <form method="POST" id="deleteProduct">
-      <legend><strong>Delete Product</strong></legend>
-          <fieldset class="fields">
-          <p>Are you sure you wish to delete the following?</p>
-          <input type="hidden" name="productID" id="deleteProductID" value="1">
-          <label><strong>ID:</strong></label> 1
-            <label> <strong>Product Name:</strong> </label> Apple
-            
-    </fieldset>
-    <input class="btn" type="submit" id="deleteProduct" value="Delete Product">
-          <input class="btn" type="button" value="cancel" onClick="browseProduct()">
-  </form> 
-</div><!-- delete -->
+    <table border="1" cellpadding="5">
+      <tr>
+        <th><a href="#" onClick="newProduct()">New</a></th>
+        <th></th>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Unit Price ($)</th>
+        <th>Category ID</th>
+      </tr>
+      <tr>
+        <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
+        <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
+        <td>1</td>
+        <td>Apple</td>
+        <td>0.70</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
+        <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
+        <td>2</td>
+        <td>Dragonfruit</td>
+        <td>2.50</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
+        <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
+        <td>3</td>
+        <td>Potato</td>
+        <td>1.20</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
+        <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
+        <td>4</td>
+        <td>Egg</td>
+        <td>3.00</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
+        <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
+        <td>5</td>
+        <td>Milk</td>
+        <td>3.50</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
+        <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
+        <td>6</td>
+        <td>Cheese</td>
+        <td>1.00</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
+        <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
+        <td>7</td>
+        <td>Pretzel</td>
+        <td>1.60</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
+        <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
+        <td>8</td>
+        <td>Popcorn</td>
+        <td>2.30</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td><a href="#" onClick="updateProduct('this.productID')">Edit</a></td>
+        <td><a href="#" onclick="deleteProduct('this.productID')">Delete</a></td>
+        <td>9</td>
+        <td>Takis</td>
+        <td>2.50</td>
+        <td>3</td>
+      </tr>
+
+      
+    </table>
+
+    <p>&nbsp;</p>
+    <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+    <p>&nbsp;</p>
+    </div> <!-- browse -->
+    <div id="insert">
+        <form method="POST" id="addPlanet">
+            <legend><strong>Add Product</strong></legend>
+              <fieldset class="fields">
+                <label> Product Name </label> <input type="text" name="productName">
+                <label> Unit Price </label> <input type="text" name="unitPrice">
+                <label> Category ID </label> <select name="categoryID">
+                  <option value="0">&nbsp;</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    </select>
+          </fieldset>
+              <input class="btn btn-outline-secondary" type="submit" id="addProduct" value="Add Product">
+              <input class="btn btn-outline-secondary" type="button" value="cancel" onClick="browseProduct()">
+      </form> 
+    </div><!-- insert -->
+    <p>&nbsp;</p>
+    <div id="update">
+        <form method="POST" id="updateProduct">
+            <legend><strong>Update Product</strong></legend>
+              <fieldset class="fields">
+              <input type="hidden" name="productID" id="updateProductID" value="1">
+              <label> ID: </label> 1
+                <label> Product Name </label> <input type="text" name="productName" value="Apple">
+                <label> Unit Price </label> <input type="text" name="unitPrice" value="0.70">
+                <label> Category ID </label> <select name="homeworld">
+                  <option value="0">&nbsp;</option>
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    </select>
+          </fieldset>
+              <input class="btn btn-outline-secondary" type="submit" id="UpdateSaveProduct" value="Save Update Product">
+              <input class="btn btn-outline-secondary" type="button" value="cancel" onClick="browseProduct()">
+      </form> 
+    </div><!-- update -->
+    <p>&nbsp;</p>
+    <div id="delete" style="display: block">
+      <form method="POST" id="deleteProduct">
+          <legend><strong>Delete Product</strong></legend>
+              <fieldset class="fields">
+              <p>Are you sure you wish to delete the following?</p>
+              <input type="hidden" name="productID" id="deleteProductID" value="1">
+              <label><strong>ID:</strong></label> 1
+                <label> <strong>Product Name:</strong> </label> Apple
+                
+        </fieldset>
+        <input class="btn btn-outline-secondary" type="submit" id="deleteProduct" value="Delete Product">
+              <input class="btn btn-outline-secondary" type="button" value="cancel" onClick="browseProduct()">
+      </form> 
+    </div>
+  </main>
+<!-- delete -->
 
 </body>
 </html>

@@ -2,6 +2,7 @@
 <head>
 <title>Categories</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
+<link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
 <script language="JavaScript">
 		function showform(dowhat) {
 			/*
@@ -48,78 +49,105 @@
 </head>
 
 <body onload="browseCategory()">
-<h1>Categories</h1>
+  <header data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">ExpressMart</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" href="index.html">Home</a>
+            <a class="nav-link" href="products.html">Products</a>
+            <a class="nav-link" href="categories.html">Categories</a>
+            <a class="nav-link" href="customers.html">Customers</a>
+            <a class="nav-link" href="employees.html">Employees</a>
+            <a class="nav-link" href="transactions.html">Transactions</a>
+            <a class="nav-link" href="itemsInTransaction.html">Transaction Details</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="py-5 text-center header-container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">Categories</h1>
+        </div>
+      </div>
+    </section>
+    <div id="browse">
+      <table border="1" cellpadding="5">
+        <tr>
+          <th><a href="#" onClick="newCategory()">New</a></th>
+          <th></th>
+          <th>Category ID</th>
+          <th>Category Name</th>
+        </tr>
+        <tr>
+          <td><a href="#" onClick="updateCategory('this.categoryID')">Edit</a></td>
+          <td><a href="#" onclick="deleteCategory('this.categoryID')">Delete</a></td>
+          <td>1</td>
+          <td>Produce</td>
+        </tr>
+        <tr>
+          <td><a href="#" onClick="updateCategory('this.categoryID')">Edit</a></td>
+          <td><a href="#" onclick="deleteCategory('this.categoryID')">Delete</a></td>
+          <td>2</td>
+          <td>Dairy and Eggs</td>
+        </tr>
+        <tr>
+          <td><a href="#" onClick="updateCategory('this.categoryID')">Edit</a></td>
+          <td><a href="#" onclick="deleteCategory('this.categoryID')">Delete</a></td>
+          <td>3</td>
+          <td>Snacks</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      </div> <!-- browse -->
+      <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+      <div id="insert">
+          <form method="POST" id="addCategory">
+              <legend><strong>Add Category</strong></legend>
+                <fieldset class="fields">
+                  <label> Category Name </label> <input type="text" name="categoryName">
+            </fieldset>
+                <input class="btn btn-outline-secondary" type="submit" id="addCategory" value="Add Category">
+                <input class="btn btn-outline-secondary" type="button" value="cancel" onClick="browseCategory()">
+        </form> 
+      </div><!-- insert -->
+      <p>&nbsp;</p>
+      <div id="update">
+          <form method="POST" id="updateCategory">
+              <legend><strong>Update Category</strong></legend>
+                <fieldset class="fields">
+                <input type="hidden" name="categoryID" id="updateCategoryID" value="1">
+                <label> ID: </label> 1
+                  <label> Category Name </label> <input type="text" name="categoryName" value="Produce">
+            </fieldset>
+                <input class="btn btn-outline-secondary" type="submit" id="UpdateSaveCategory" value="Save Update Category">
+                <input class="btn btn-outline-secondary" type="button" value="cancel" onClick="browseCategory()">
+        </form> 
+      </div><!-- update -->
+      <p>&nbsp;</p>
+      <div id="delete" style="display: block">
+        <form method="POST" id="deleteCategory">
+            <legend><strong>Delete Category</strong></legend>
+                <fieldset class="fields">
+                <p>Are you sure you wish to delete the following?</p>
+                <input type="hidden" name="categoryID" id="deleteCategoryID" value="1">
+                <label><strong>ID:</strong></label> 1
+                  <label> <strong>Category Name:</strong> </label> Produce
+                  
+          </fieldset>
+          <input class="btn btn-outline-secondary" type="submit" id="deleteCategory" value="Delete Category">
+                <input class="btn btn-outline-secondary" type="button" value="cancel" onClick="browseCategory()">
+        </form> 
+      </div><!-- delete -->
 
-[ <a href="index.html">Home</a> | <a href="products.html">Products</a> | <a href="categories.html">Categories</a> | <a href="customers.html">Customers</a> | <a href="employees.html">Employees</a> | <a href="transactions.html">Transactions</a> | <a href="itemsInTransaction.html">Transaction Details</a> ]
-
-<div id="browse">
-<p><a href="#" onClick="showAll()">Display all forms</a> </p>
-<table border="1" cellpadding="5">
-  <tr>
-    <th><a href="#" onClick="newCategory()">New</a></th>
-    <th></th>
-    <th>Category ID</th>
-    <th>Category Name</th>
-  </tr>
-  <tr>
-    <td><a href="#" onClick="updateCategory('this.categoryID')">Edit</a></td>
-    <td><a href="#" onclick="deleteCategory('this.categoryID')">Delete</a></td>
-    <td>1</td>
-    <td>Produce</td>
-  </tr>
-  <tr>
-    <td><a href="#" onClick="updateCategory('this.categoryID')">Edit</a></td>
-    <td><a href="#" onclick="deleteCategory('this.categoryID')">Delete</a></td>
-    <td>2</td>
-    <td>Dairy and Eggs</td>
-  </tr>
-  <tr>
-    <td><a href="#" onClick="updateCategory('this.categoryID')">Edit</a></td>
-    <td><a href="#" onclick="deleteCategory('this.categoryID')">Delete</a></td>
-    <td>3</td>
-    <td>Snacks</td>
-  </tr>
-</table>
-<p>&nbsp;</p>
-</div> <!-- browse -->
-<div id="insert">
-    <form method="POST" id="addCategory">
-        <legend><strong>Add Category</strong></legend>
-          <fieldset class="fields">
-            <label> Category Name </label> <input type="text" name="categoryName">
-      </fieldset>
-          <input class="btn" type="submit" id="addCategory" value="Add Category">
-          <input class="btn" type="button" value="cancel" onClick="browseCategory()">
-	</form> 
-</div><!-- insert -->
-<p>&nbsp;</p>
-<div id="update">
-    <form method="POST" id="updateCategory">
-        <legend><strong>Update Category</strong></legend>
-          <fieldset class="fields">
-          <input type="hidden" name="categoryID" id="updateCategoryID" value="1">
-          <label> ID: </label> 1
-            <label> Category Name </label> <input type="text" name="categoryName" value="Produce">
-      </fieldset>
-          <input class="btn" type="submit" id="UpdateSaveCategory" value="Save Update Category">
-          <input class="btn" type="button" value="cancel" onClick="browseCategory()">
-	</form> 
-</div><!-- update -->
-<p>&nbsp;</p>
-<div id="delete" style="display: block">
-  <form method="POST" id="deleteCategory">
-      <legend><strong>Delete Category</strong></legend>
-          <fieldset class="fields">
-          <p>Are you sure you wish to delete the following?</p>
-          <input type="hidden" name="categoryID" id="deleteCategoryID" value="1">
-          <label><strong>ID:</strong></label> 1
-            <label> <strong>Category Name:</strong> </label> Produce
-            
-    </fieldset>
-    <input class="btn" type="submit" id="deleteCategory" value="Delete Category">
-          <input class="btn" type="button" value="cancel" onClick="browseCategory()">
-  </form> 
-</div><!-- delete -->
+  </main>
 
 </body>
 </html>

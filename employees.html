@@ -2,6 +2,7 @@
     <head>
         <title>Employees</title>
         <link href="style.css" rel="stylesheet" type="text/css" />
+        <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
         <script language="JavaScript">
             function showform(dowhat) {
                 /*
@@ -48,18 +49,36 @@
     </head>
 
     <body onload="browseEmployee()">
-        <h1>Employees</h1>
-    
-        [<a href="index.html">Home</a>
-        <a href="products.html">Products</a>
-        <a href="categories.html">Categories</a>
-        <a href="customers.html">Customers</a>
-        <a href="employees.html">Employees</a>
-        <a href="transactions.html">Transactions</a>
-        <a href="itemsInTransaction.html">Transaction Details</a>]
-
+      <header data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">ExpressMart</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-link active" href="index.html">Home</a>
+                <a class="nav-link" href="products.html">Products</a>
+                <a class="nav-link" href="categories.html">Categories</a>
+                <a class="nav-link" href="customers.html">Customers</a>
+                <a class="nav-link" href="employees.html">Employees</a>
+                <a class="nav-link" href="transactions.html">Transactions</a>
+                <a class="nav-link" href="itemsInTransaction.html">Transaction Details</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <section class="py-5 text-center header-container">
+          <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+              <h1 class="fw-light">Employees</h1>
+            </div>
+          </div>
+        </section>
         <div id="browse">
-          <p><a href="#" onClick="showAll()">Display all forms</a> </p>
           <table border="1" cellpadding="5">
             <tr>
               <th><a href="#" onClick="newEmployee()">New</a></th>
@@ -79,7 +98,7 @@
               <td>Wayne</td>
               <td>jwayne@gmail.com</td>
               <td>Store Manager</td>
-              <th>5</th>
+              <td>5</td>
             </tr>
             <tr>
               <td><a href="#" onClick="updateEmployee('this.employeeID')">Edit</a></td>
@@ -89,7 +108,7 @@
               <td>Mark</td>
               <td>lmark@gmail.com</td>
               <td>Cashier</td>
-              <th>6</th>
+              <td>6</td>
             </tr>
             <tr>
               <td><a href="#" onClick="updateEmployee('this.employeeID')">Edit</a></td>
@@ -99,7 +118,7 @@
               <td>Tang</td>
               <td>atang@gmail.com</td>
               <td>Cashier</td>
-              <th>7</th>
+              <td>7</td>
             </tr>
             <tr>
               <td><a href="#" onClick="updateEmployee('this.employeeID')">Edit</a></td>
@@ -109,12 +128,13 @@
               <td>Collins</td>
               <td>mcollins@gmail.com</td>
               <td>Grocery Clerk</td>
-              <th>NULL</th>
+              <td>NULL</td>
             </tr>
           </table>
           <p>&nbsp;</p>
         </div>
         <!-- browse -->
+        <p><a href="#" onClick="showAll()">Display all forms</a> </p>
 
         <!-- add new emplyyee -->
         <div id="insert" style="display: block">
@@ -136,8 +156,8 @@
                 <label for="customerID">Customer ID</label>
                 <input type="text" id="customerID" name="customerID" />
               </fieldset>
-              <input class="btn" type="submit" id="submitNewEmployee" value="Submit New Employee"/>
-              <input class="btn" type="button" value="Cancel" onClick="browseEmployee()"/>
+              <input class="btn btn-outline-secondary" type="submit" id="submitNewEmployee" value="Submit New Employee"/>
+              <input class="btn btn-outline-secondary" type="button" value="Cancel" onClick="browseEmployee()"/>
             </form>
           </div> 
         <p>&nbsp;</p>
@@ -167,8 +187,8 @@
               <label for="customerID">Customer ID</label>
               <input type="text" id="customerID" name="customerID" />
             </fieldset>
-            <input class="btn" type="submit" id="UpdateEmployee" value="Save Update Employee"/>
-            <input class="btn" type="button" value="cancel" onClick="browseEmployee()"/>
+            <input class="btn btn-outline-secondary" type="submit" id="UpdateEmployee" value="Save Update Employee"/>
+            <input class="btn btn-outline-secondary" type="button" value="cancel" onClick="browseEmployee()"/>
           </form>
         </div>
         <!-- delete -->
@@ -181,14 +201,15 @@
               <label>Employee ID:</label> 1
             </fieldset>
             <input
-              class="btn"
+              class="btn btn-outline-secondary"
               type="submit"
               id="DeleteEmployee"
               value="Delete Employee"
             />
-            <input class="btn" type="button" value="cancel" onClick="browseEmployee()"/>
+            <input class="btn btn-outline-secondary" type="button" value="cancel" onClick="browseEmployee()"/>
           </form>
         </div>
+      </main>
     
       </body>
     </html>
