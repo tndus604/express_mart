@@ -41,10 +41,52 @@
 			}
 		}
     function newProduct() { showform('insert'); }
-    function updateProduct(pid) { showform('update'); }
-    function deleteProduct(pid) { showform ('delete'); }
+    function updateProduct(productID) { showform('update', productID); }
+    function deleteProduct(productID) { showform('delete', productID); }
     function browseProduct() { showform ('browse'); }
     function showAll() { showform ('all'); }
+
+    async function fetchProducts() {
+      try {
+        const response = await fetch("http://localhost:3000/api/products");
+        const products = await response.json();
+        renderTable(products);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    }
+
+    // Function to dynamically populate the table with product data
+    function renderTable(products) {
+      const table = document.getElementById("productTable");
+
+      // Iterate through each product and create a new row
+      products.forEach(product => {
+        const row = table.insertRow();
+
+        // Add cells for each property
+        const newCell1 = row.insertCell(0);
+        const newCell2 = row.insertCell(1);
+        const newCell3 = row.insertCell(2);
+        const newCell4 = row.insertCell(3);
+        const newCell5 = row.insertCell(4);
+        const newCell6 = row.insertCell(5);
+        const newCell7 = row.insertCell(6);
+        const newCell8 = row.insertCell(7);
+
+        // Populate the cells with product data
+        newCell1.innerHTML = '<a href="#" onClick="newProduct()">New</a>';
+        newCell2.innerHTML = ''; // Adjust as needed
+        newCell3.innerHTML = product.productID;
+        newCell4.innerHTML = product.productName;
+        newCell5.innerHTML = product.unitPrice;
+        newCell6.innerHTML = product.categoryID;
+        newCell7.innerHTML = `<a href="#" onClick="updateProduct(${product.productID})">Edit</a>`;
+        newCell8.innerHTML = `<a href="#" onclick="deleteProduct(${product.productID})">Delete</a>`;
+      });
+    }
+
+    window.onload = fetchProducts;
 </script>
 </head>
 
@@ -83,7 +125,7 @@
     <div id="browse">
 
 
-    <table border="1" cellpadding="5">
+    <table border="1" cellpadding="5" id="productTable">
       <tr>
         <th><a href="#" onClick="newProduct()">New</a></th>
         <th></th>
@@ -173,7 +215,7 @@
     <p>&nbsp;</p>
     </div> <!-- browse -->
     <div id="insert">
-        <form method="POST" id="addPlanet">
+        <form method="POST" id="addProduct">
             <legend><strong>Add Product</strong></legend>
               <fieldset class="fields">
                 <label> Product Name </label> <input type="text" name="productName">

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <script src="./assets/js/color-modes.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content='IE=edge'>
+    <title>Group 110</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .card-image-container {
+        position: relative;
+        overflow: hidden;
+        padding-bottom: 66.67%; /* Maintain a 3:2 aspect ratio (adjust as needed) */
+      }
+      .card-image-container img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
+
+    
+  </head>
+  <body>    
+    <header data-bs-theme="dark">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">ExpressMart</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" href="index">Home</a>
+              <a class="nav-link" href="products">Products</a>
+              <a class="nav-link" href="categories">Categories</a>
+              <a class="nav-link" href="customers">Customers</a>
+              <a class="nav-link" href="employees">Employees</a>
+              <a class="nav-link" href="transactions">Transactions</a>
+              <a class="nav-link" href="itemsInTransaction">Transaction Details</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+<script src="js/scripts_products.js"></script> 
+
+
+<button id="insert_product_btn">+ New Product</button>
+
+<!-- INSERT -->
+<section id="insert_product_form" class="hidden_form">
+    <h2>Add New Product</h2>
+    <form action="/add-product" method="POST">
+        <label for="productProductName">Product Name:</label>
+        <input
+        type="text"
+        id="productProductName"
+        name="productProductName"
+        maxlength="225"
+        required
+        />
+        <label for="productUnitPrice">Unit Price:</label>
+        <input
+        type="number"
+        id="productUnitPrice"
+        name="productUnitPrice"
+        step="0.01"  <!-- Set the step to allow decimal values -->
+        min="0"      <!-- Set the minimum value to prevent negative prices -->
+        required
+        />
+        <label for="productCategoryID">Category ID:</label>
+        <input
+        type="text"
+        id="productCategoryID"
+        name="productCategoryID"
+        maxlength="225"
+        required
+        />
+      
+        <button type="submit">Submit</button>
+        <button type="button" id="insert_product_cancel">Cancel</button>
+    </form>
+</section>
+
+<!-- UPDATE -->
+<section id="update_product_form" class="hidden_form">
+    <h2>Update Product</h2>
+    <form action="/update-product" method="POST">
+      <label for="updateProductID">ID:</label>
+      <input
+        type="text"
+        id="updateProductID"
+        name="updateProductID"
+        readonly
+      />
+      <label for="updateProductProductName">Product Name:</label>
+     <input
+        type="text"
+        id="updateProductProductName"
+        name="updateProductProductName"
+        maxlength="225"
+        required
+     />
+        <label for="updateProductUnitPrice">Unit Price:</label>
+        <input
+        type="number"
+        id="updateProductUnitPrice"
+        name="updateProductUnitPrice"
+        step="0.01"  <!-- Set the step to allow decimal values -->
+        min="0"      <!-- Set the minimum value to prevent negative prices -->
+        required
+     />
+        
+        <label for="updateProductCategoryID">Category ID:</label>
+          <input
+          type="text"
+          id="updateProductCategoryID"
+          name="updateProductCategoryID"
+          maxlength="225"
+          placeholder="Enter category ID if applicable"
+      />
+      <button type="submit">Update</button>
+      <button type="button" id="update_product_cancel">Cancel</button>
+    </form>
+  </section>
+  
+<!-- SELECT -->
+<table id="products-table">
+
+    <thead>
+
+        {{!-- Table headers --}}
+        <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Unit Price</th>
+            <th>Category ID</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {{#each data}}
+        <tr 
+        data-value={{this.productID}} 
+        data-product-name="{{this.productName}}" 
+        data-unit-price="{{this.unitPrice}}" 
+        data-categoryID={{this.categoryID}}
+        >
+            <td>{{this.productID}}</td>
+            <td>{{this.productName}}</td>
+            <td>{{this.unitPrice}}</td>
+            <td>{{this.categoryID}}</td>
+            <td class="edit_icon">✎</td>
+            <td class="delete_product_icon">🗑</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

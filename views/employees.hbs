@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <script src="./assets/js/color-modes.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content='IE=edge'>
+    <title>Group 110</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .card-image-container {
+        position: relative;
+        overflow: hidden;
+        padding-bottom: 66.67%; /* Maintain a 3:2 aspect ratio (adjust as needed) */
+      }
+      .card-image-container img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
+
+    
+  </head>
+  <body>    
+    <header data-bs-theme="dark">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">ExpressMart</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" href="index">Home</a>
+              <a class="nav-link" href="products">Products</a>
+              <a class="nav-link" href="categories">Categories</a>
+              <a class="nav-link" href="customers">Customers</a>
+              <a class="nav-link" href="employees">Employees</a>
+              <a class="nav-link" href="transactions">Transactions</a>
+              <a class="nav-link" href="itemsInTransaction">Transaction Details</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+<script src="js/scripts_employees.js"></script> 
+
+
+<button id="insert_employee_btn">+ New Employee</button>
+
+<!-- INSERT -->
+<section id="insert_employee_form" class="hidden_form">
+    <h2>Add New Employee</h2>
+    <form action="/add-employee" method="POST">
+        <label for="employeeFirstName">First Name:</label>
+        <input
+        type="text"
+        id="employeeFirstName"
+        name="employeeFirstName"
+        maxlength="225"
+        required
+        />
+        <label for="employeeLastName">Last Name:</label>
+        <input
+        type="text"
+        id="employeeLastName"
+        name="employeeLastName"
+        maxlength="225"
+        required
+        />
+        <label for="employeeEmail">Email:</label>
+        <input
+        type="email"
+        id="employeeEmail"
+        name="employeeEmail"
+        maxlength="225"
+        required
+        />
+        <label for="employeePosition">Position:</label>
+        <input
+        type="text"
+        id="employeePosition"
+        name="employeePosition"
+        maxlength="225"
+        required
+        />
+        <label for="employeeCustomerID">Customer ID:</label>
+        <input
+        type="text"
+        id="employeeCustomerID"
+        name="employeeCustomerID"
+        maxlength="225"
+        placeholder="Enter customer ID if applicable"
+        />
+        <button type="submit">Submit</button>
+        <button type="button" id="insert_employee_cancel">Cancel</button>
+    </form>
+</section>
+
+<!-- UPDATE -->
+<section id="update_employee_form" class="hidden_form">
+    <h2>Update Employee</h2>
+    <form action="/update-employee" method="POST">
+      <label for="updateEmployeeID">ID:</label>
+      <input
+        type="text"
+        id="updateEmployeeID"
+        name="updateEmployeeID"
+        readonly
+      />
+      <label for="updateEmployeeFirstName">First Name:</label>
+     <input
+        type="text"
+        id="updateEmployeeFirstName"
+        name="updateEmployeeFirstName"
+        maxlength="225"
+        required
+     />
+        <label for="updateEmployeeLastName">Last Name:</label>
+        <input
+        type="text"
+        id="updateEmployeeLastName"
+        name="updateEmployeeLastName"
+        maxlength="225"
+        required
+     />
+        <label for="updateEmployeeEmail">Email:</label>
+        <input
+        type="email"
+        id="updateEmployeeEmail"
+        name="updateEmployeeEmail"
+        maxlength="225"
+        required
+      />
+        <label for="updateEmployeePosition">Position:</label>
+          <input
+          type="text"
+          id="updateEmployeePosition"
+          name="updateEmployeePosition"
+          maxlength="225"
+          required
+        />
+        <label for="updateEmployeeCustomerID">Customer ID:</label>
+          <input
+          type="text"
+          id="updateEmployeeCustomerID"
+          name="updateEmployeeCustomerID"
+          maxlength="225"
+          placeholder="Enter customer ID if applicable"
+      />
+      <button type="submit">Update</button>
+      <button type="button" id="update_employee_cancel">Cancel</button>
+    </form>
+  </section>
+  
+<!-- SELECT -->
+<table id="employees-table">
+
+    <thead>
+
+        {{!-- Table headers --}}
+        <tr>
+            <th>Employee ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Position</th>
+            <th>Customer ID</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {{#each data}}
+        <tr 
+        data-value={{this.employeeID}} 
+        data-first-name="{{this.firstName}}" 
+        data-last-name="{{this.lastName}}" 
+        data-email={{this.email}}
+        data-position={{this.position}}
+        data-customerID={{this.customerID}}
+        >
+            <td>{{this.employeeID}}</td>
+            <td>{{this.firstName}}</td>
+            <td>{{this.lastName}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.position}}</td>
+            <td>{{this.customerID}}</td>
+            <td class="edit_icon">✎</td>
+            <td class="delete_employee_icon">🗑</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

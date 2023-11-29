@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <script src="./assets/js/color-modes.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content='IE=edge'>
+    <title>Group 110</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .card-image-container {
+        position: relative;
+        overflow: hidden;
+        padding-bottom: 66.67%; /* Maintain a 3:2 aspect ratio (adjust as needed) */
+      }
+      .card-image-container img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
+
+    
+  </head>
+  <body>    
+    <header data-bs-theme="dark">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">ExpressMart</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" href="index">Home</a>
+              <a class="nav-link" href="products">Products</a>
+              <a class="nav-link" href="categories">Categories</a>
+              <a class="nav-link" href="customers">Customers</a>
+              <a class="nav-link" href="employees">Employees</a>
+              <a class="nav-link" href="transactions">Transactions</a>
+              <a class="nav-link" href="itemsInTransaction">Transaction Details</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+
+      <section class="py-5 text-center" style="background-image: url('img/background2.jpg'); background-size: cover;">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light" style="color: white; text-shadow: 2px 2px 4px black;">Welcome to ExpressMart</h1>
+            
+          </div>
+        </div>
+      </section>
+
+      <div class="album py-5 bg-body-tertiary ">
+        <div class="container">
+
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col">
+              <div class="card shadow-sm">
+                <div class="card-image-container">
+                  <a href="./products"><img src="img/products.jpg"></a>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Products</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="./products" class="btn btn-sm btn-outline-secondary" type="button">View</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <div class="card-image-container">
+                  <a href="./categories"><img src="img/category.jpg"></a>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Categories</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="./categories" class="btn btn-sm btn-outline-secondary" type="button">View</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <div class="card-image-container">
+                  <a href="./customers"><img src="img/customers.jpg"></a>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Customers</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="./customers" class="btn btn-sm btn-outline-secondary" type="button">View</a>
+                    </div>  
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card shadow-sm">
+                <div class="card-image-container">
+                  <a href="./employees"><img src="img/employees.jpg"></a>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Employees</p>
+                  <div class=" justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="./employees" class="btn btn-sm btn-outline-secondary" type="button">View</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <div class="card-image-container">
+                  <a href="./transactions"><img src="img/transaction.jpg"></a>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Transactions</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="./transactions" class="btn btn-sm btn-outline-secondary" type="button">View</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <div class="card-image-container">
+                  <a href="./itemsInTransaction"><img src="img/items.png"></a>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Transaction Details</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="./itemsInTransaction" class="btn btn-sm btn-outline-secondary" type="button">View</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="text-body-secondary py-5">
+      <div class="container">
+        <p class="float-end mb-1">
+          <a href="#">Back to top</a>
+        </p>
+        <p class="mb-1">@copyright 2023 Team110 Su Youn Jeon and Xinrui Hou</p>
+      </div>
+    </footer>
+    <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+</html>

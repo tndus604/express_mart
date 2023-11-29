@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <script src="./assets/js/color-modes.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content='IE=edge'>
+    <title>Group 110</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .card-image-container {
+        position: relative;
+        overflow: hidden;
+        padding-bottom: 66.67%; /* Maintain a 3:2 aspect ratio (adjust as needed) */
+      }
+      .card-image-container img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
+
+    
+  </head>
+  <body>    
+    <header data-bs-theme="dark">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">ExpressMart</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" href="index">Home</a>
+              <a class="nav-link" href="products">Products</a>
+              <a class="nav-link" href="categories">Categories</a>
+              <a class="nav-link" href="customers">Customers</a>
+              <a class="nav-link" href="employees">Employees</a>
+              <a class="nav-link" href="transactions">Transactions</a>
+              <a class="nav-link" href="itemsInTransaction">Transaction Details</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+<script src="js/scripts_customers.js"></script> 
+
+
+<button id="insert_customer_btn">+ New Customer</button>
+
+<!-- INSERT -->
+<section id="insert_customer_form" class="hidden_form">
+    <h2>Add New Customer</h2>
+    <form action="/add-customer" method="POST">
+        <label for="customerType">Customer Type:</label>
+        <select id="customerType" name="customerType" required>
+          <option value="Registered">Registered</option>
+          <option value="Guest">Guest</option>
+          <option value="Employee">Employee</option>
+        </select>
+        <label for="customerFirstName">First Name:</label>
+        <input
+        type="text"
+        id="customerFirstName"
+        name="customerFirstName"
+        maxlength="225"
+        />
+        <label for="customerLastName">Last Name:</label>
+        <input
+        type="text"
+        id="customerLastName"
+        name="customerLastName"
+        maxlength="225"
+        />
+        <label for="customerEmail">Email:</label>
+        <input
+        type="email"
+        id="customerEmail"
+        name="customerEmail"
+        maxlength="225"
+        />
+
+        <button type="submit">Submit</button>
+        <button type="button" id="insert_customer_cancel">Cancel</button>
+    </form>
+</section>
+
+<!-- UPDATE -->
+<section id="update_customer_form" class="hidden_form">
+    <h2>Update Customer</h2>
+    <form action="/update-customer" method="POST">
+      <label for="updateCustomerID">ID:</label>
+      <input
+        type="text"
+        id="updateCustomerID"
+        name="updateCustomerID"
+        readonly
+      />
+      <label for="updateCustomerType">Customer Type:</label>
+        <select id="updateCustomerType" name="updateCustomerType" required>
+          <option value="Registered">Registered</option>
+          <option value="Guest">Guest</option>
+          <option value="Employee">Employee</option>
+        </select>
+      <label for="updateCustomerFirstName">First Name:</label>
+     <input
+        type="text"
+        id="updateCustomerFirstName"
+        name="updateCustomerFirstName"
+        maxlength="225"
+     />
+        <label for="updateCustomerLastName">Last Name:</label>
+        <input
+        type="text"
+        id="updateCustomerLastName"
+        name="updateCustomerLastName"
+        maxlength="225"
+     />
+        <label for="updateCustomerEmail">Email:</label>
+        <input
+        type="email"
+        id="updateCustomerEmail"
+        name="updateCustomerEmail"
+        maxlength="225"
+      />
+       
+      <button type="submit">Update</button>
+      <button type="button" id="update_customer_cancel">Cancel</button>
+    </form>
+  </section>
+  
+<!-- SELECT -->
+<table id="customers-table">
+
+    <thead>
+
+        {{!-- Table headers --}}
+        <tr>
+            <th>Customer ID</th>
+            <th>Customer Type</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {{#each data}}
+        <tr 
+        data-value={{this.customerID}} 
+        data-customer-type={{this.customerType}} 
+        data-first-name="{{this.firstName}}" 
+        data-last-name="{{this.lastName}}" 
+        data-email={{this.email}}
+        >
+            <td>{{this.customerID}}</td>
+            <td>{{this.customerType}}</td>
+            <td>{{this.firstName}}</td>
+            <td>{{this.lastName}}</td>
+            <td>{{this.email}}</td>
+            <td class="edit_icon">✎</td>
+            <td class="delete_customer_icon">🗑</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
