@@ -50,3 +50,20 @@ table th {
     height: 100%;
     object-fit: cover;
   }
+
+  #insert_category_btn, #insert_customer_btn, #insert_product_btn, #insert_employee_btn, #insert_transaction_btn, #insert_itemsInTransaction_btn
+  {
+    margin-top: 20px;
+  }
+
+  #update_category_form, #update_customer_form, #update_product_form, #update_employee_form, #update_transaction_form, #update_itemsInTransaction_form
+  {
+    margin-bottom: 20px;
+  }
+
+  #categories-table, #customers-table, #products-table, #employees-table, #transactions-table, #itemsInTransaction-table{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+
+  }

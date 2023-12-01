@@ -1,203 +1,148 @@
-<html>
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
   <head>
-    <title>Transaction Details</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <script language="JavaScript">
-        function showform(dowhat) {
-            /*
-            * four DIVS: browse, insert, update, delete
-            * this function sets one visible the others not
-            */
-            if (dowhat == 'insert'){
-                document.getElementById('browse').style.display = 'none';
-                document.getElementById('insert').style.display = 'block';
-                document.getElementById('update').style.display = 'none';
-                document.getElementById('delete').style.display = 'none';
-            }
-            else if (dowhat == 'update'){
-                document.getElementById('browse').style.display = 'none';
-                document.getElementById('insert').style.display = 'none';
-                document.getElementById('update').style.display = 'block';
-                document.getElementById('delete').style.display = 'none';
-            }
-            else if (dowhat == 'delete'){
-                document.getElementById('browse').style.display = 'none';
-                document.getElementById('insert').style.display = 'none';
-                document.getElementById('update').style.display = 'none';
-                document.getElementById('delete').style.display = 'block';
-            }
-            else if (dowhat == 'all'){
-                document.getElementById('browse').style.display = 'block';
-                document.getElementById('insert').style.display = 'block';
-                document.getElementById('update').style.display = 'block';
-                document.getElementById('delete').style.display = 'block';
-            }
-            else { //by default display browse
-                document.getElementById('browse').style.display = 'block';
-                document.getElementById('insert').style.display = 'none';
-                document.getElementById('update').style.display = 'none';
-                document.getElementById('delete').style.display = 'none';
-            }
-            }
-        function newItemsInTransaction() { showform('insert'); }
-        function updateItemsInTransaction(pid) { showform('update'); }
-        function deleteItemsInTransaction(pid) { showform ('delete'); }
-        function browseItemsInTransaction() { showform ('browse'); }
-        function showAll() { showform ('all'); }
-    </script>
+    <script src="./assets/js/color-modes.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content='IE=edge'>
+    <title>Group 110</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .card-image-container {
+        position: relative;
+        overflow: hidden;
+        padding-bottom: 66.67%; /* Maintain a 3:2 aspect ratio (adjust as needed) */
+      }
+      .card-image-container img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
+
+    
   </head>
+  <body>    
+    <header data-bs-theme="dark">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index">ExpressMart</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" href="index">Home</a>
+              <a class="nav-link" href="products">Products</a>
+              <a class="nav-link" href="categories">Categories</a>
+              <a class="nav-link" href="customers">Customers</a>
+              <a class="nav-link" href="employees">Employees</a>
+              <a class="nav-link" href="transactions">Transactions</a>
+              <a class="nav-link" href="itemsInTransaction">Transaction Details</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+<script src="js/scripts_itemsInTransaction.js"></script> 
 
-  <body onload="browseItemsInTransaction()">
-    <h1>Transaction Details</h1>
 
-    [<a href="index.html">Home</a>
-    <a href="products.html">Products</a>
-    <a href="categories.html">Categories</a>
-    <a href="customers.html">Customers</a>
-    <a href="employees.html">Employees</a>
-    <a href="transactions.html">Transactions</a>
-    <a href="itemsInTransaction.html">Transaction Details</a>]
+<button id="insert_itemsInTransaction_btn">+ New Transaction Detail</button>
 
-    <div id="browse">
-        <p><a href="#" onClick="showAll()">Display all forms</a> </p>
-        <table border="1" cellpadding="5">
-          <tr>
-            <th><a href="#" onClick="newItemsInTransaction()">New</a></th>
-            <th></th>
+<!-- INSERT -->
+<section id="insert_itemsInTransaction_form" class="hidden_form">
+    <h2>Add New Transaction Detail</h2>
+    <form action="/add-itemsInTransaction" method="POST">
+        <label for="transactionID">Transaction ID:</label>
+        <input type="text" id="transactionID" name="transactionID" maxlength="225" required/>
+    
+    
+        <label for="productName">Item Name:</label>
+        <input type="text" id="productName" name="productName" maxlength="225" required/>
+        
+
+        <label for="quantity">Item Quantity:</label>
+        <input type="number" id="quantity" name="quantity" maxlength="225" required/>
+
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" name="amount" maxlength="225" required/>
+        <button type="submit">Submit</button>
+
+        <button type="button" id="insert_itemsInTransaction_cancel">Cancel</button>
+    </form>
+</section>
+
+<!-- UPDATE -->
+<section id="update_itemsInTransaction_form" class="hidden_form">
+    <h2>Update Transaction Detail</h2>
+    <form action="/update-transactionDetail" method="POST">
+
+      <!-- Item ID (remains the same) -->
+      <label for="updateItemID">Item ID:</label>
+      <input type="text" id="updateItemID" name="updateItemID" readonly />
+
+      <!-- Transaction ID (remains the same) -->
+      <label for="updateTransactionID">Transaction ID:</label>
+      <input type="text" id="updateTransactionID" name="updateTransactionID" readonly />
+
+      <!-- Product Name selecting from the products -->
+      <label for="updateProductName">Item Name:</label>
+      <input type="text" id="updateProductName" name="updateProductName" maxlength="225" required/>
+
+      <!-- Employee ID (replaces 'Employee Email', now using employeeID instead of email) -->
+     <label for="updateQuantity">Item Quantity:</label>
+        <input type="number" id="updateQuantity" name="updateQuantity" maxlength="225" required/>
+
+    <label for="updateAmount">Item Price:</label>
+    <input type="updateAmount" id="updateAmount" name="updateAmount" maxlength="225" required/>
+
+      <!-- Update Button -->
+      <button type="submit">Update</button>
+      <button type="button" id="update_itemsInTansaction_cancel">Cancel</button>
+    </form>
+</section>
+
+  
+<!-- SELECT -->
+<table id="itemsInTransaction-table">
+
+    <thead>
+
+        {{!-- Table headers --}}
+        <tr>
             <th>Item ID</th>
-            <th>Transaction ID</th>
-            <th>Product ID</th>
-            <th>Quentity</th>
+            <th>TransactionID</th>
+            <th>Item Name</th>
+            <th>Item Quantity</th>
             <th>Amount</th>
-          </tr>
-          <tr>
-            <td><a href="#" onClick="updateItemsInTransaction('this.transactionID')">Edit</a></td>
-            <td><a href="#" onclick="deleteItemsInTransaction('this.transactionID')">Delete</a></td>
-            <td align="center">1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>5</td>
-            <td>3.50</td>
-          </tr>
-          <tr>
-            <td><a href="#" onClick="updateItemsInTransaction('this.transactionID')">Edit</a></td>
-            <td><a href="#" onclick="deleteItemsInTransaction('this.transactionID')">Delete</a></td>
-            <td align="center">2</td>
-            <td>1</td>
-            <td>4</td>
-            <td>3</td>
-            <td>1.20</td>
-          </tr>
-          <tr>
-            <td><a href="#" onClick="updateItemsInTransaction('this.transactionID')">Edit</a></td>
-            <td><a href="#" onclick="deleteItemsInTransaction('this.transactionID')">Delete</a></td>
-            <td align="center">3</td>
-            <td>2</td>
-            <td>3</td>
-            <td>1</td>
-            <td>1.20</td>
-          </tr>
-          <tr>
-            <td><a href="#" onClick="updateItemsInTransaction('this.transactionID')">Edit</a></td>
-            <td><a href="#" onclick="deleteItemsInTransaction('this.transactionID')">Delete</a></td>
-            <td align="center">4</td>
-            <td>2</td>
-            <td>4</td>
-            <td>6</td>
-            <td>1.80</td>
-          </tr>
-          <tr>
-            <td><a href="#" onClick="updateItemsInTransaction('this.transactionID')">Edit</a></td>
-            <td><a href="#" onclick="deleteItemsInTransaction('this.transactionID')">Delete</a></td>
-            <td align="center">5</td>
-            <td>3</td>
-            <td>9</td>
-            <td>2</td>
-            <td>5.00</td>
-          </tr>
-          <tr>
-            <td><a href="#" onClick="updateItemsInTransaction('this.transactionID')">Edit</a></td>
-            <td><a href="#" onclick="deleteItemsInTransaction('this.transactionID')">Delete</a></td>
-            <td align="center">6</td>
-            <td>4</td>
-            <td>7</td>
-            <td>10</td>
-            <td>16.00</td>
-          </tr>
-          <tr>
-            <td><a href="#" onClick="updateItemsInTransaction('this.transactionID')">Edit</a></td>
-            <td><a href="#" onclick="deleteItemsInTransaction('this.transactionID')">Delete</a></td>
-            <td align="center">7</td>
-            <td>4</td>
-            <td>9</td>
-            <td>10</td>
-            <td>25.00</td>
-          </tr>
-        </table>
-        <p>&nbsp;</p>
-      </div>
-      <!-- browse -->
-  
-      <!-- add new detail -->
-      <div id="insert" style="display: block">
-          <form id="addTransactionDetail">
-            <legend><strong>Add Transaction Detail</strong></legend>
-            <fieldset class="fields">
-    
-              <label for="transactionID">Transaction ID</label>
-              <input type="text" id="transactionID" name="transactionID" />
-    
-              <label for="productID">Product ID</label>
-              <input type="text" id="productID" name="productID" />
-    
-              <label for="quentity">Quentity</label>
-              <input type="text" id="quentity" name="quentity" />
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
 
-              <label for="amount">Amount</label>
-              <input type="text" id="amount" name="amount" />
-            </fieldset>
-            <input class="btn"type="submit" id="submitTransactionDetail" value="Submit Transaction Detail"/>
-            <input class="btn" type="button" value="Cancel" onClick="browseItemsInTransaction()"/>
-          </form>
-        </div> 
-      <p>&nbsp;</p>
-      <!-- update -->
-      <div id="update" style="display: block">
-        <form id="updateOrder">
-          <legend><strong>Update Transaction Detail</strong></legend>
-          <fieldset class="fields">
-            <label for="itemID">Item ID</label>
-            <select id="itemID" name="itemID">
-              <option value="Null">Null</option>
-              <option value="1">1</option>
-            </select>
-    
-            <label for="productID">Product ID</label>
-            <input type="text" id="productID" name="productID" value = "1"/>
-    
-            <label for="quentity">Quantity</label>
-            <input type="text" id="quentity" name="quentity" value = "5"/>
+    <tbody>
 
-            <label for="amount">Amount</label>
-            <input type="text" id="amount" name="amount" value = "3.50"/>
-          </fieldset>
-          <input class="btn" type="submit" id="UpdateTransactionDetail" value="Save Update Transaction Detail"/>
-          <input class="btn" type="button" value="cancel" onClick="browseItemsInTransaction()"/>
-        </form>
-      </div>
-      <!-- delete -->
-      <p>&nbsp;</p>
-      <div id="delete" style="display: block">
-        <form id="deleteOrder">
-          <legend><strong>Delete Item in Transaction</strong></legend>
-          <fieldset class="fields">
-            <p>Are you sure you wish to delete the following?</p>
-            <label>Item Order ID:</label> 5 <label> 
-          </fieldset>
-          <input class="btn" type="submit" id="DeleteTransactionDetail" value="Delete Transaction Detail"/>
-          <input class="btn" type="button" value="cancel" onClick="browseItemsInTransaction()"/>
-        </form>
-      </div>
-  
-    </body>
-  </html>
+        {{#each data}}
+        <tr 
+        data-value={{this.itemID}}
+        data-transaction-id ={{this.transactionID}}
+        data-product-name={{this.productName}} 
+        data-quantity="{{this.quantity}}" 
+        data-amount={{this.amount}}
+        >
+            <td>{{this.itemID}}</td>
+            <td>{{this.transactionID}}</td>
+            <td>{{this.productName}}</td>
+            <td>{{this.quantity}}</td>
+            <td>{{this.amount}}</td>
+            <td class="edit_itemsInTransaction_icon">✎</td>
+            <td class="delete_transactionDetail_icon">🗑</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
