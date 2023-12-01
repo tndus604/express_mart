@@ -5,7 +5,7 @@
 */
 var express = require('express');   // We are using the express library for the web server
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
-PORT        = 9133;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 9130;                 // Set a port number at the top so it's easy to change in the future
 
 // Database
 var db = require('./database/db-connector')
@@ -129,15 +129,29 @@ app.get('/transactions', function(req, res) {
         FROM Transactions
         LEFT JOIN Customers ON Transactions.customerID = Customers.customerID
         LEFT JOIN Employees ON Transactions.employeeID = Employees.employeeID;`;
+    
+    let query2 = `SELECT * FROM Customers`
+    let query3 = `SELECT * FROM Employees`  
 
     db.pool.query(query, function(error, rows, fields) {
         if (error) {
             console.error(error);
             res.sendStatus(500); // Internal Server Error
         } else {
-            // Render the 'transactions' template with the data retrieved from the database
-            res.render('transactions', { data: rows });
-        }
+            let Transactions = rows;
+            db.pool.query(query2, (error, rows, fields) => {
+            
+                // Save the Customers
+                let Customers = rows;
+
+                db.pool.query(query3, (error, rows, fields) => {
+            
+                    // Save the planets
+                    let Employees = rows;
+                    return res.render('transactions', {data: Transactions, Customers: Customers, Employees: Employees});
+                });
+            });
+        };
     });
 });
 
@@ -155,15 +169,39 @@ app.get('/itemsInTransaction', function(req, res)                 // This is the
         LEFT JOIN Transactions ON ItemsInTransaction.transactionID = Transactions.transactionID
         LEFT JOIN Products ON ItemsInTransaction.productID = Products.productID
         ;`;
+    // db.pool.query(query, function(error, rows, fields) {
+    //     if (error) {
+    //         console.error(error);
+    //         res.sendStatus(500); // Internal Server Error
+    //     } else {
+    //             // Render the 'transactions' template with the data retrieved from the database
+    //         res.render('itemsInTransaction', { data: rows });
+    //         }
+    //     });  
+    
+    let query2 = `SELECT * FROM Products`
+    let query3 = `SELECT * FROM Transactions`  
+
     db.pool.query(query, function(error, rows, fields) {
         if (error) {
             console.error(error);
             res.sendStatus(500); // Internal Server Error
         } else {
-                // Render the 'transactions' template with the data retrieved from the database
-            res.render('itemsInTransaction', { data: rows });
-            }
-        });                                               
+            let ItemsInTransaction = rows;
+            db.pool.query(query2, (error, rows, fields) => {
+            
+                // Save the Products
+                let Products = rows;
+
+                db.pool.query(query3, (error, rows, fields) => {
+            
+                    // Save the Transactions
+                    let Transactions = rows;
+                    return res.render('itemsInTransaction', {data: ItemsInTransaction, Products: Products, Transactions: Transactions});
+                });
+            });
+        };
+    });                                             
 }); 
 
 

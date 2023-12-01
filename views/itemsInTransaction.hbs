@@ -59,20 +59,32 @@
     <h2>Add New Transaction Detail</h2>
     <form action="/add-itemsInTransaction" method="POST">
         <label for="transactionID">Transaction ID:</label>
-        <input type="text" id="transactionID" name="transactionID" maxlength="225" required/>
+        {{!-- <input type="text" id="transactionID" name="transactionID" maxlength="225" required/> --}}
+          <select name="transactionID" id="transactionID">
+            <option value="">Select a transaction ID</option>
+            {{#each Transactions}}
+            <option value="{{this.transactionID}}">{{this.transactionID}}</option>
+            {{/each}}
+          </select>
     
     
         <label for="productName">Item Name:</label>
-        <input type="text" id="productName" name="productName" maxlength="225" required/>
+        {{!-- <input type="text" id="productName" name="productName" maxlength="225" required/> --}}
+          <select name="productName" id="productName">
+            <option value="">Select the product name:</option>
+            {{#each Products}}
+            <option value="{{this.productName}}">{{this.productName}}</option>
+            {{/each}}
+          </select>
         
 
         <label for="quantity">Item Quantity:</label>
         <input type="number" id="quantity" name="quantity" maxlength="225" required/>
 
         <label for="amount">Amount:</label>
-        <input type="text" id="amount" name="amount" maxlength="225" required/>
+        <input type="number" id="amount" name="amount" maxlength="225" step="0.01" required/>
+        
         <button type="submit">Submit</button>
-
         <button type="button" id="insert_itemsInTransaction_cancel">Cancel</button>
     </form>
 </section>
@@ -99,7 +111,7 @@
         <input type="number" id="updateQuantity" name="updateQuantity" maxlength="225" required/>
 
     <label for="updateAmount">Item Price:</label>
-    <input type="updateAmount" id="updateAmount" name="updateAmount" maxlength="225" required/>
+    <input type="number" id="updateAmount" name="updateAmount" maxlength="225" step="0.01" required/>
 
       <!-- Update Button -->
       <button type="submit">Update</button>
