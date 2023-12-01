@@ -1,0 +1,16 @@
+node_modules/
+
+# Compiled binaries:
+*.exe
+*.dll
+*.so
+
+# Dependency and configuration files
+.env
+.env.local
+
+build/
+dist/
+
+.DS_Store
+Thumbs.db
