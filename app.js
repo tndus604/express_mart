@@ -5,7 +5,7 @@
 */
 var express = require('express');   // We are using the express library for the web server
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
-PORT        = 9130;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 9129;                 // Set a port number at the top so it's easy to change in the future
 
 // Database
 var db = require('./database/db-connector')
@@ -65,8 +65,9 @@ app.get('/categories', function(req, res)                 // This is the basic s
 app.get('/products', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
        // Define our query
-        let queryProductSelect = "SELECT productID, productName, unitPrice, categoryID FROM Products;";
-        
+        let queryProductSelect = "SELECT * FROM Products;";
+        let query2 = "SELECT * FROM Categories";
+
         // Execute the query and render the template with the results
         db.pool.query(queryProductSelect, function(error, rows, fields) {
             if (error) {
@@ -74,8 +75,14 @@ app.get('/products', function(req, res)                 // This is the basic syn
                 console.error(error);
                 res.sendStatus(500); // Internal Server Error
             } else {
-                // Render the 'products' template with the data retrieved from the database
-                res.render('products', { data: rows });
+                let Products = rows
+                // Run the second query
+                db.pool.query(query2, (error, rows, fields) => {
+                            
+                    // Save the planets
+                    let Categories = rows;
+                    return res.render('products', {data: Products, Categories: Categories});
+                })
             }
         });                                                 
     });  
