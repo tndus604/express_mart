@@ -15,4 +15,4 @@ dist/
 .DS_Store
 Thumbs.db
 
-db-connector.js
+./database/db-connector.js
