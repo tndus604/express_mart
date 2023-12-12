@@ -1,3 +1,11 @@
+<!-- main.hbs-->
+<!-- 
+//Authors: Su Youn Jeon and Xinrui Hou
+// Citation for the following code is modified from the template Github repository for CS 340:
+//https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/ (Code & comments were copied)
+// Date: Nov, 15th, 2023
+-->
+
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head>
@@ -37,8 +45,8 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link active" href="index">Home</a>
-              <a class="nav-link" href="products">Products</a>
+              <a class="nav-link" href="index">Home</a>
+              <a class="nav-link active" href="products">Products</a>
               <a class="nav-link" href="categories">Categories</a>
               <a class="nav-link" href="customers">Customers</a>
               <a class="nav-link" href="employees">Employees</a>
@@ -59,21 +67,9 @@
     <h2>Add New Product</h2>
     <form action="/add-product" method="POST">
         <label for="productProductName">Product Name:</label>
-        <input
-        type="text"
-        id="productProductName"
-        name="productProductName"
-        maxlength="225"
-        required
-        />
+        <input type="text" id="productProductName" name="productProductName" maxlength="225" required/>
         <label for="productUnitPrice">Unit Price:</label>
-        <input
-        type="number"
-        id="productUnitPrice"
-        name="productUnitPrice"
-        step="0.01"
-        required
-        />
+        <input type="number" id="productUnitPrice" name="productUnitPrice" min="0"  step="0.01" required/>
         <label for="productCategoryID">Category Name:</label>
         {{!-- <input
         type="text"
@@ -97,32 +93,22 @@
 <!-- UPDATE -->
 <section id="update_product_form" class="hidden_form">
     <h2>Update Product</h2>
+    <p style="font-size: 1em; color: #333; margin-bottom: 20px;">
+        You can access an UPDATE by clicking a specific "✎" from the below table.
+    </p>
+
     <form action="/update-product" method="POST">
+
       <label for="updateProductID">ID:</label>
-      <input
-        type="text"
-        id="updateProductID"
-        name="updateProductID"
-        readonly
-      />
+      <input type="text" id="updateProductID" name="updateProductID"readonly/>
+
       <label for="updateProductProductName">Product Name:</label>
-     <input
-        type="text"
-        id="updateProductProductName"
-        name="updateProductProductName"
-        maxlength="225"
-        required
-     />
-        <label for="updateProductUnitPrice">Unit Price:</label>
-        <input
-        type="number"
-        id="updateProductUnitPrice"
-        name="updateProductUnitPrice"
-        step="0.01"
-        required
-     />
+     <input type="text" id="updateProductProductName" name="updateProductProductName" maxlength="225" required/>
         
-        <label for="updateProductCategoryID">Category ID:</label>
+      <label for="updateProductUnitPrice">Unit Price:</label>
+        <input type="number" id="updateProductUnitPrice" name="updateProductUnitPrice" min="0" step="0.01" required />
+        
+        <label for="updateProductCategoryID">Category Name:</label>
           {{!-- <input
           type="text"
           id="updateProductCategoryID"
@@ -151,7 +137,7 @@
             <th>Product ID</th>
             <th>Product Name</th>
             <th>Unit Price</th>
-            <th>Category ID</th>
+            <th>Category Name</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -164,12 +150,12 @@
         data-value={{this.productID}} 
         data-product-name="{{this.productName}}" 
         data-unit-price="{{this.unitPrice}}" 
-        data-categoryID={{this.categoryID}}
+        data-category-name={{this.categoryName}}
         >
             <td>{{this.productID}}</td>
             <td>{{this.productName}}</td>
-            <td>{{this.unitPrice}}</td>
-            <td>{{this.categoryID}}</td>
+            <td>${{this.unitPrice}}</td>
+            <td>{{this.categoryName}}</td>
             <td class="edit_icon">✎</td>
             <td class="delete_product_icon">🗑</td>
         </tr>

@@ -1,3 +1,13 @@
+<!-- transactions.hbs-->
+<!-- 
+//Authors: Su Youn Jeon and Xinrui Hou
+// Citation for the following code is modified from the template Github repository for CS 340:
+//https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/ (Code & comments were copied)
+// Handle bar helper function is cited seperately from StackOverflow:
+// https://stackoverflow.com/questions/15411833/using-moment-js-to-convert-date-to-string-mm-dd-yyyy 
+// Date: Nov, 15th, 2023
+-->
+
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head>
@@ -37,12 +47,12 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link active" href="index">Home</a>
+              <a class="nav-link" href="index">Home</a>
               <a class="nav-link" href="products">Products</a>
               <a class="nav-link" href="categories">Categories</a>
               <a class="nav-link" href="customers">Customers</a>
               <a class="nav-link" href="employees">Employees</a>
-              <a class="nav-link" href="transactions">Transactions</a>
+              <a class="nav-link active" href="transactions">Transactions</a>
               <a class="nav-link" href="itemsInTransaction">Transaction Details</a>
             </div>
           </div>
@@ -69,19 +79,19 @@
     
         <label for="employeeEmail">Employee Email:</label>
         {{!-- <input type="email" id="employeeEmail" name="employeeEmail" maxlength="225" required/> --}}
-          <select name="employeeEmail" id="employeeEmail">
-            <option value="">Select an employee</option>
-            {{#each Employees}}
-            <option value="{{this.email}}">{{this.email}}</option>
-            {{/each}}
-          </select>
+            <select name="employeeEmail" id="employeeEmail">
+              <option value="">Select an Employee</option>
+              {{#each Employees}}
+              <option value="{{this.email}}">{{this.email}}</option>
+              {{/each}}
+            </select>
 
         <label for="purchaseDate">Transaction Date:</label>
         <input type="date" id="purchaseDate" name="purchaseDate" maxlength="225" value="{{formatDate purchaseDate}}" required/>
 
         <label for="totalAmount">Total Amount:</label>
-        <input type="text" id="totalAmount" name="totalAmount" maxlength="225" step="0.01" required/>
-        <br/>
+        <input type="number" id="totalAmount" name="totalAmount" maxlength="225" min="0" step ='0.01' required/>
+
         <button type="submit">Submit</button>
         <button type="button" id="insert_transaction_cancel">Cancel</button>
     </form>
@@ -90,6 +100,10 @@
 <!-- UPDATE -->
 <section id="update_transaction_form" class="hidden_form">
     <h2>Update Transaction</h2>
+    <p style="font-size: 1em; color: #333; margin-bottom: 20px;">
+        You can access an UPDATE by clicking a specific "✎" from the below table.
+    </p>
+
     <form action="/update-transaction" method="POST">
       <!-- Transaction ID (remains the same) -->
       <label for="updateTransactionID">ID:</label>
@@ -99,9 +113,14 @@
       <label for="updateCustomerEmail">Customer Email:</label>
       <input type="email" id="updateCustomerEmail" name="updateCustomerEmail" maxlength="225" readonly />
 
-      <!-- Employee ID (replaces 'Employee Email', now using employeeID instead of email) -->
-      <label for="updateEmployeeEmail">Employee:</label>
-      <input type="email" id="updateEmployeeEmail" name="updateEmployeeEmail" maxlength="225" readonly />
+      <!-- NEW UPDATE considering a different employee can update an order: Employee ID to fetch email-->
+      <label for="updateEmployeeID">Employee:</label>
+      <select name="updateEmployeeID" id="updateEmployeeID">
+          <option value="">Select an Employee</option>
+          {{#each Employees}}
+          <option value="{{this.employeeID}}">{{this.email}}</option>
+          {{/each}}
+      </select>
 
       <!-- Purchase Date -->
       <label for="updatePurchaseDate">Transaction Date:</label>
@@ -109,10 +128,9 @@
 
       <!-- Total Amount -->
       <label for="updateTotalAmount">Total Amount:</label>
-      <input type="text" id="updateTotalAmount" name="updateTotalAmount" maxlength="225" step="0.01" required />
+      <input type="number" id="updateTotalAmount" name="updateTotalAmount" maxlength="225" min="0" step = '0.01' required />
 
       <!-- Update Button -->
-      <br/>
       <button type="submit">Update</button>
       <button type="button" id="update_transaction_cancel">Cancel</button>
     </form>
@@ -150,7 +168,7 @@
             <td>{{this.customerEmail}}</td>
             <td>{{this.employeeEmail}}</td>
             <td>{{formatDate this.purchaseDate}}</td>
-            <td>{{this.totalAmount}}</td>
+            <td>${{this.totalAmount}}</td>
             <td class="edit_transaction_icon">✎</td>
             <td class="delete_transaction_icon">🗑</td>
         </tr>

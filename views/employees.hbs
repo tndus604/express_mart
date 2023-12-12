@@ -1,3 +1,11 @@
+<!-- main.hbs-->
+<!-- 
+//Authors: Su Youn Jeon and Xinrui Hou
+// Citation for the following code is modified from the template Github repository for CS 340:
+//https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/ (Code & comments were copied)
+// Date: Nov, 15th, 2023
+-->
+
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head>
@@ -31,17 +39,17 @@
     <header data-bs-theme="dark">
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.html">ExpressMart</a>
+          <a class="navbar-brand" href="index">ExpressMart</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link active" href="index">Home</a>
+              <a class="nav-link" href="index">Home</a>
               <a class="nav-link" href="products">Products</a>
               <a class="nav-link" href="categories">Categories</a>
               <a class="nav-link" href="customers">Customers</a>
-              <a class="nav-link" href="employees">Employees</a>
+              <a class="nav-link active" href="employees">Employees</a>
               <a class="nav-link" href="transactions">Transactions</a>
               <a class="nav-link" href="itemsInTransaction">Transaction Details</a>
             </div>
@@ -57,6 +65,7 @@
 <!-- INSERT -->
 <section id="insert_employee_form" class="hidden_form">
     <h2>Add New Employee</h2>
+    <p style="color: #d61010;">When enter customer type, please input 'Employee' if applicable, otherwise, leave it blank<p>
     <form action="/add-employee" method="POST">
         <label for="employeeFirstName">First Name:</label>
         <input
@@ -83,21 +92,18 @@
         required
         />
         <label for="employeePosition">Position:</label>
-        <input
-        type="text"
-        id="employeePosition"
-        name="employeePosition"
-        maxlength="225"
-        required
-        />
-        <label for="employeeCustomerID">Customer ID:</label>
-        <input
-        type="text"
-        id="employeeCustomerID"
-        name="employeeCustomerID"
-        maxlength="225"
-        placeholder="Enter customer ID if applicable"
-        />
+        {{!-- <input type="text" id="employeePosition" name="employeePosition" maxlength="225" required/> --}}
+        <select id="employeePosition" name="employeePosition" required>
+          <option value="Cashier">Cashier</option>
+          <option value="Organizer">Organizer</option>
+          <option value="Store Manager">Store Manager</option>
+          <option value="Sales Associate">Sales Associate</option>
+          <option value="Janitor">Janitor</option>
+        </select>
+
+        <label for="employeeCustomerType">Customer Type:</label>
+        <input type="text" id="employeeCustomerType" name="employeeCustomerType" maxlength="225" placeholder="If so, input 'Employee'"/>
+        
         <button type="submit">Submit</button>
         <button type="button" id="insert_employee_cancel">Cancel</button>
     </form>
@@ -106,6 +112,10 @@
 <!-- UPDATE -->
 <section id="update_employee_form" class="hidden_form">
     <h2>Update Employee</h2>
+    <p style="font-size: 1em; color: #333; margin-bottom: 20px;">
+        You can access an UPDATE by clicking a specific "✎" from the below table.
+    </p>
+
     <form action="/update-employee" method="POST">
       <label for="updateEmployeeID">ID:</label>
       <input
@@ -139,21 +149,18 @@
         required
       />
         <label for="updateEmployeePosition">Position:</label>
-          <input
-          type="text"
-          id="updateEmployeePosition"
-          name="updateEmployeePosition"
-          maxlength="225"
-          required
-        />
-        <label for="updateEmployeeCustomerID">Customer ID:</label>
-          <input
-          type="text"
-          id="updateEmployeeCustomerID"
-          name="updateEmployeeCustomerID"
-          maxlength="225"
-          placeholder="Enter customer ID if applicable"
-      />
+          {{!--<input type="text" id="updateEmployeePosition" name="updateEmployeePosition" maxlength="225" required/>--}}
+          <select id="updateEmployeePosition" name="updateEmployeePosition" required>
+          <option value="Cashier">Cashier</option>
+          <option value="Organizer">Organizer</option>
+          <option value="Store Manager">Store Manager</option>
+          <option value="Sales Associate">Sales Associate</option>
+          <option value="Janitor">Janitor</option>
+        </select>
+
+        <label for="updateEmployeeCustomerType">Customer type:</label>
+        <input type="text" id="updateEmployeeCustomerType" name="updateEmployeeCustomerType" maxlength="225" readonly/>
+
       <button type="submit">Update</button>
       <button type="button" id="update_employee_cancel">Cancel</button>
     </form>
@@ -171,7 +178,7 @@
             <th>Last Name</th>
             <th>Email</th>
             <th>Position</th>
-            <th>Customer ID</th>
+            <th>Customer Type</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -186,15 +193,15 @@
         data-last-name="{{this.lastName}}" 
         data-email={{this.email}}
         data-position={{this.position}}
-        data-customerID={{this.customerID}}
+        data-customer-type={{this.customerType}}
         >
             <td>{{this.employeeID}}</td>
             <td>{{this.firstName}}</td>
             <td>{{this.lastName}}</td>
             <td>{{this.email}}</td>
             <td>{{this.position}}</td>
-            <td>{{this.customerID}}</td>
-            <td class="edit_icon">✎</td>
+            <td>{{this.customerType}}</td>
+            <td class="edit_employee_icon">✎</td>
             <td class="delete_employee_icon">🗑</td>
         </tr>
         {{/each}}

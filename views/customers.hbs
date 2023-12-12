@@ -1,3 +1,11 @@
+<!-- main.hbs-->
+<!-- 
+//Authors: Su Youn Jeon and Xinrui Hou
+// Citation for the following code is modified from the template Github repository for CS 340:
+//https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/ (Code & comments were copied)
+// Date: Nov, 15th, 2023
+-->
+
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head>
@@ -31,16 +39,16 @@
     <header data-bs-theme="dark">
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.html">ExpressMart</a>
+          <a class="navbar-brand" href="index">ExpressMart</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link active" href="index">Home</a>
+              <a class="nav-link" href="index">Home</a>
               <a class="nav-link" href="products">Products</a>
               <a class="nav-link" href="categories">Categories</a>
-              <a class="nav-link" href="customers">Customers</a>
+              <a class="nav-link active" href="customers">Customers</a>
               <a class="nav-link" href="employees">Employees</a>
               <a class="nav-link" href="transactions">Transactions</a>
               <a class="nav-link" href="itemsInTransaction">Transaction Details</a>
@@ -58,12 +66,7 @@
 <section id="insert_customer_form" class="hidden_form">
     <h2>Add New Customer</h2>
     <form action="/add-customer" method="POST">
-        <label for="customerType">Customer Type:</label>
-        <select id="customerType" name="customerType" required>
-          <option value="Registered">Registered</option>
-          <option value="Guest">Guest</option>
-          <option value="Employee">Employee</option>
-        </select>
+
         <label for="customerFirstName">First Name:</label>
         <input
         type="text"
@@ -78,6 +81,15 @@
         name="customerLastName"
         maxlength="225"
         />
+
+        <label for="customerType">Customer Type:</label>
+        <select id="customerType" name="customerType" required>
+          <option value="Registered">Registered</option>
+          <option value="Guest">Guest</option>
+          <option value="Employee">Employee</option>
+        </select>
+        <p id="employeeMessage" style="display: none; color: #d61010;">The employee customer can enjoy additional sales.</p>
+
         <label for="customerEmail">Email:</label>
         <input
         type="email"
@@ -94,6 +106,10 @@
 <!-- UPDATE -->
 <section id="update_customer_form" class="hidden_form">
     <h2>Update Customer</h2>
+    <p style="font-size: 1em; color: #333; margin-bottom: 20px;">
+        You can access an UPDATE by clicking a specific "✎" from the below table.
+    </p>
+
     <form action="/update-customer" method="POST">
       <label for="updateCustomerID">ID:</label>
       <input
@@ -102,12 +118,7 @@
         name="updateCustomerID"
         readonly
       />
-      <label for="updateCustomerType">Customer Type:</label>
-        <select id="updateCustomerType" name="updateCustomerType" required>
-          <option value="Registered">Registered</option>
-          <option value="Guest">Guest</option>
-          <option value="Employee">Employee</option>
-        </select>
+
       <label for="updateCustomerFirstName">First Name:</label>
      <input
         type="text"
@@ -122,6 +133,14 @@
         name="updateCustomerLastName"
         maxlength="225"
      />
+
+      <label for="updateCustomerType">Customer Type:</label>
+        <select id="updateCustomerType" name="updateCustomerType" required>
+          <option value="Registered">Registered</option>
+          <option value="Guest">Guest</option>
+          <option value="Employee">Employee</option>
+        </select>
+
         <label for="updateCustomerEmail">Email:</label>
         <input
         type="email"
@@ -143,9 +162,9 @@
         {{!-- Table headers --}}
         <tr>
             <th>Customer ID</th>
-            <th>Customer Type</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Customer Type</th>
             <th>Email</th>
             <th>Edit</th>
             <th>Delete</th>
@@ -153,19 +172,19 @@
     </thead>
 
     <tbody>
-
+{{!--Update: shifted the table structure to show customer name and customer type --}}
         {{#each data}}
         <tr 
         data-value={{this.customerID}} 
-        data-customer-type={{this.customerType}} 
         data-first-name="{{this.firstName}}" 
         data-last-name="{{this.lastName}}" 
+        data-customer-type={{this.customerType}} 
         data-email={{this.email}}
         >
             <td>{{this.customerID}}</td>
-            <td>{{this.customerType}}</td>
             <td>{{this.firstName}}</td>
             <td>{{this.lastName}}</td>
+            <td>{{this.customerType}}</td>
             <td>{{this.email}}</td>
             <td class="edit_icon">✎</td>
             <td class="delete_customer_icon">🗑</td>

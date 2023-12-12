@@ -1,3 +1,13 @@
+<!-- itemsInTransactions.hbs-->
+<!-- 
+//Authors: Su Youn Jeon and Xinrui Hou
+// Citation for the following code is modified from the template Github repository for CS 340:
+//https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/ (Code & comments were copied)
+// Handle bar helper function is cited seperately from StackOverflow:
+// https://stackoverflow.com/questions/15411833/using-moment-js-to-convert-date-to-string-mm-dd-yyyy 
+// Date: Nov, 15th, 2023
+-->
+
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head>
@@ -37,13 +47,13 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link active" href="index">Home</a>
+              <a class="nav-link" href="index">Home</a>
               <a class="nav-link" href="products">Products</a>
               <a class="nav-link" href="categories">Categories</a>
               <a class="nav-link" href="customers">Customers</a>
               <a class="nav-link" href="employees">Employees</a>
               <a class="nav-link" href="transactions">Transactions</a>
-              <a class="nav-link" href="itemsInTransaction">Transaction Details</a>
+              <a class="nav-link active" href="itemsInTransaction">Transaction Details</a>
             </div>
           </div>
         </div>
@@ -57,21 +67,28 @@
 <!-- INSERT -->
 <section id="insert_itemsInTransaction_form" class="hidden_form">
     <h2>Add New Transaction Detail</h2>
+    <p  style="color: #d61010;">Please check the Transactions table for the customer's email address and the matching purchase date for a specific transaction.</p>
     <form action="/add-itemsInTransaction" method="POST">
-        <label for="transactionID">Transaction ID:</label>
-        {{!-- <input type="text" id="transactionID" name="transactionID" maxlength="225" required/> --}}
-          <select name="transactionID" id="transactionID">
-            <option value="">Select a transaction ID</option>
-            {{#each Transactions}}
-            <option value="{{this.transactionID}}">{{this.transactionID}}</option>
+        <label for="customerEmail">Customer Email:</label>
+        <select name="customerEmail" id="customerEmail">
+            <option value="">Access a transaction by selecting a customer email </option>
+            {{#each Customers}}
+            <option value="{{this.email}}">{{this.email}}</option>
             {{/each}}
           </select>
     
+        <label for="purchaseDate">Purchase Date:</label>
+        <select name="purchaseDate" id="purchaseDate">
+            <option value="">Target the transaction by selecting the purchase date </option>
+            {{#each Transactions}}
+            <option value="{{formatDate purchaseDate}}">{{formatDate this.purchaseDate}}</option>
+            {{/each}}
+          </select>
+
     
-        <label for="productName">Item Name:</label>
-        {{!-- <input type="text" id="productName" name="productName" maxlength="225" required/> --}}
-          <select name="productName" id="productName">
-            <option value="">Select the product name:</option>
+        <label for="productName">Item Name:</label>  
+        <select name="productName" id="productName">
+            <option value="">Select the Product Name:</option>
             {{#each Products}}
             <option value="{{this.productName}}">{{this.productName}}</option>
             {{/each}}
@@ -79,12 +96,11 @@
         
 
         <label for="quantity">Item Quantity:</label>
-        <input type="number" id="quantity" name="quantity" maxlength="225" required/>
+        <input type="number" id="quantity" name="quantity" maxlength="225" min="0" required/>
 
-        <label for="amount">Amount:</label>
-        <input type="number" id="amount" name="amount" maxlength="225" step="0.01" required/>
         
         <button type="submit">Submit</button>
+
         <button type="button" id="insert_itemsInTransaction_cancel">Cancel</button>
     </form>
 </section>
@@ -92,30 +108,33 @@
 <!-- UPDATE -->
 <section id="update_itemsInTransaction_form" class="hidden_form">
     <h2>Update Transaction Detail</h2>
+    <p style="font-size: 1em; color: #333; margin-bottom: 20px;">
+        You can access an UPDATE by clicking a specific "✎" from the below table.
+    </p>
     <form action="/update-transactionDetail" method="POST">
 
       <!-- Item ID (remains the same) -->
       <label for="updateItemID">Item ID:</label>
       <input type="text" id="updateItemID" name="updateItemID" readonly />
 
-      <!-- Transaction ID (remains the same) -->
-      <label for="updateTransactionID">Transaction ID:</label>
-      <input type="text" id="updateTransactionID" name="updateTransactionID" readonly />
-
       <!-- Product Name selecting from the products -->
       <label for="updateProductName">Item Name:</label>
-      <input type="text" id="updateProductName" name="updateProductName" maxlength="225" required/>
+      
+      <select name="updateProductName" id="updateProductName">
+            <option value="">Select the Product Name:</option>
+            {{#each Products}}
+            <option value="{{this.productName}}">{{this.productName}}</option>
+            {{/each}}
+          </select>
+     
 
-      <!-- Employee ID (replaces 'Employee Email', now using employeeID instead of email) -->
+      <!-- Quantity  -->
      <label for="updateQuantity">Item Quantity:</label>
-        <input type="number" id="updateQuantity" name="updateQuantity" maxlength="225" required/>
-
-    <label for="updateAmount">Item Price:</label>
-    <input type="number" id="updateAmount" name="updateAmount" maxlength="225" step="0.01" required/>
+        <input type="number" id="updateQuantity" name="updateQuantity" maxlength="225" min="0" required/>
 
       <!-- Update Button -->
       <button type="submit">Update</button>
-      <button type="button" id="update_itemsInTansaction_cancel">Cancel</button>
+      <button type="button" id="update_itemsInTransaction_cancel">Cancel</button>
     </form>
 </section>
 
@@ -128,7 +147,8 @@
         {{!-- Table headers --}}
         <tr>
             <th>Item ID</th>
-            <th>TransactionID</th>
+            <th>Customer Email</th>
+            <th>Purchase Date</th>
             <th>Item Name</th>
             <th>Item Quantity</th>
             <th>Amount</th>
@@ -142,16 +162,18 @@
         {{#each data}}
         <tr 
         data-value={{this.itemID}}
-        data-transaction-id ={{this.transactionID}}
+        data-customer-email ={{this.email}}
+        data-purchase-date ={{this.purchaseDate}}
         data-product-name={{this.productName}} 
         data-quantity="{{this.quantity}}" 
         data-amount={{this.amount}}
         >
             <td>{{this.itemID}}</td>
-            <td>{{this.transactionID}}</td>
+            <td>{{this.email}}</td>
+            <td>{{formatDate this.purchaseDate}}</td>
             <td>{{this.productName}}</td>
             <td>{{this.quantity}}</td>
-            <td>{{this.amount}}</td>
+            <td>${{this.amount}}</td>
             <td class="edit_itemsInTransaction_icon">✎</td>
             <td class="delete_transactionDetail_icon">🗑</td>
         </tr>
