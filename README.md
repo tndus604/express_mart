@@ -1,4 +1,4 @@
-# CS340 Database Portfolio Project - Express Mart
+# Database Portfolio Project - Express Mart
 
 The project involves the development of a web-based user interface (UI) designed to facilitate Create-Read-Update-Delete (CRUD) functionalities. The UI is built using Node.js and Handlebars, serving content over the web. The backend is powered by an SQL-driven database (MariaDB).
 
