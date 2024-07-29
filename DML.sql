@@ -1,7 +1,12 @@
--- These are some Database Manipulation queries for a partially implemented Project Website 
--- using the bsg database.
--- Your submission should contain ALL the queries required to implement ALL the
--- functionalities listed in the Project Specs.
+/*------------------------------
+    Team 110
+    Su youn Jeon, Xinrui Hou
+    Citation for the following DDL:
+    Date: 11/01/2023
+    Modified and customized based on sample_data_manipulation_queries.sql from Exploration - Database Application Design
+    Source URL: https://canvas.oregonstate.edu/courses/1933532/pages/exploration-database-application-design?module_item_id=23359467
+
+------------------------------*/ 
 
 
 --------------------SELECT - Browse queries---------------------------
@@ -47,8 +52,8 @@ INSERT INTO Products (productName, unitPrice, categoryID) VALUES (:productNameIn
 INSERT INTO Customers (customerType, firstName, lastName, email) VALUES (:customerTypeInput, :firstNameInput, :lastNameInput, :emailInput);
 
 -- insert a new employee
-INSERT INTO Employees (firstName, lastName, email, position, customerID)
-VALUES (:firstNameInput, :lastNameInput, :emailInput, :positionInput, :customerID);
+INSERT INTO Employees (firstName, lastName, email, position)
+VALUES (:firstNameInput, :lastNameInput, :emailInput, :positionInput);
 
 -- insert a new transaction
 INSERT INTO Transactions (customerID, employeeID, date, totalPrice) VALUES (:customerIDInput, :employeeIDInput, :dateInput, :totalPriceInput);
@@ -69,8 +74,7 @@ UPDATE Products SET productName = :productNameInput, unitPrice = :unitPriceInput
 -- update an exsisiting customer
 UPDATE Customers SET firstName = :firstNameInput, lastName = :lastNameInput, email = :emailInput, customerType = :customerTypeInput WHERE customerID = :customerID;
 
--- update an exsisiting employee
-UPDATE Employees SET firstName = :firstNameInput, lastName = :lastNameInput, email = :emailInput, position = :positionInput, customerID = :customerID WHERE employeeID = :employeeID_update;
+UPDATE Employees SET firstName = :firstNameInput, lastName = :lastNameInput, email = :emailInput, position = :positionInput WHERE employeeID = :employeeID_update;
 
 -- update an exsisiting transaction
 UPDATE Transactions SET customerID = :customerIDInput, employeeID = :employeeIDInput, transactionDate = :transactionDateInput, totalPrice = :totalPriceInput WHERE transactionID = :transactionID_update;
