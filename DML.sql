@@ -9,7 +9,7 @@
 ------------------------------*/ 
 
 
---------------------SELECT - Browse queries---------------------------
+-- SELECT - Browse queries
 
 -- select all categories
 SELECT categoryID, categoryName FROM Categories;
@@ -26,7 +26,7 @@ SELECT customerID, firstName, lastName, email, customerType FROM Customers;
 SELECT employeeID, firstName, lastName, email, position FROM Employees;
 
 -- select all transactions
-SELECT Transactions.transactionID, Customers.customerID, Employees.employeeID, Transactions.date, Transactions.totalPrice
+SELECT Transactions.transactionID, Customers.customerID, Employees.employeeID, Transactions.purchaseDate, Transactions.totalAmount
 FROM Transactions
 INNER JOIN Customers ON Transactions.customerID = Customers.customerID
 INNER JOIN Employees ON Transactions.employeeID = Employees.employeeID;
@@ -39,7 +39,7 @@ INNER JOIN Products ON ItemsInTransaction.productID = Products.productID;
 
 
 
---------------------INSERT queries----------------------------------------
+-- INSERT queries 
 
 -- insert a new category
 INSERT INTO Categories (categoryName)
@@ -56,7 +56,7 @@ INSERT INTO Employees (firstName, lastName, email, position)
 VALUES (:firstNameInput, :lastNameInput, :emailInput, :positionInput);
 
 -- insert a new transaction
-INSERT INTO Transactions (customerID, employeeID, date, totalPrice) VALUES (:customerIDInput, :employeeIDInput, :dateInput, :totalPriceInput);
+INSERT INTO Transactions (customerID, employeeID, date, totalAmount) VALUES (:customerIDInput, :employeeIDInput, :dateInput, :totalAmountInput);
 
 -- insert a new item in transaction.
 INSERT INTO ItemsInTransaction (transactionID, productID, quantity, amount) VALUES (:transactionIDInput, :productIDInput, :quantityInput, :amountInput);
@@ -64,7 +64,8 @@ INSERT INTO ItemsInTransaction (transactionID, productID, quantity, amount) VALU
 
 
 
-------------------------UPDATE queries-------------------------------------------
+-- UPDATE queries
+
 -- update an exsisiting category
 UPDATE Categories SET categoryName = :categoryNameInput WHERE categoryID = :categoryID_update;
 
@@ -77,13 +78,15 @@ UPDATE Customers SET firstName = :firstNameInput, lastName = :lastNameInput, ema
 UPDATE Employees SET firstName = :firstNameInput, lastName = :lastNameInput, email = :emailInput, position = :positionInput WHERE employeeID = :employeeID_update;
 
 -- update an exsisiting transaction
-UPDATE Transactions SET customerID = :customerIDInput, employeeID = :employeeIDInput, transactionDate = :transactionDateInput, totalPrice = :totalPriceInput WHERE transactionID = :transactionID_update;
+UPDATE Transactions SET customerID = :customerIDInput, employeeID = :employeeIDInput, transactionDate = :transactionDateInput, totalAmount = :totalAmountInput WHERE transactionID = :transactionID_update;
 
 -- update an exsisiting item in transaction
 UPDATE itemsInTransaction SET transactionID = :transactionID, productID = :productID, quantity = :quantityInput, amount = :amountInput WHERE itemID : itemID_update;
 
 
-------------------------DELETE queries-------------------------------------------
+
+-- DELETE queries
+
 -- delete a category
 DELETE FROM Categories WHERE categoryID= :categoryID_selected;
 
