@@ -1,18 +1,51 @@
+# Node.js dependencies
 node_modules/
+# npm debugging log
+npm-debug.log
 
-# Compiled binaries:
-*.exe
-*.dll
-*.so
-
-# Dependency and configuration files
+# Directory for environment variable configuration files
 .env
-.env.local
 
-build/
-dist/
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
+# OS generated files
 .DS_Store
 Thumbs.db
 
-./database/db-connector.js
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Build directory
+dist/
+build/
+
+# Temporary directories and files
+tmp/
+temp/
+*.tmp
+*.temp
+~*
+
+# Test directories and files
+test/
+spec/
+
+# Ignore .env files
+.env
+
+# Ignore lock files
+package-lock.json
+yarn.lock
+
+# Ignore any other specific files or directories
+your_specific_files_or_directories
