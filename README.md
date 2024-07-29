@@ -12,7 +12,8 @@ The project involves the development of a web-based user interface (UI) designed
 2. [Database Outline](#database-outline)
 3. [Schema](#schema)
 4. [Navigation](#navigation)
-5. [Citation](#citation)
+5. [Installation] (#installation)
+6. [Citation](#citation)
  
 ## Overview
 ExpressMart is a grocery store with an annual revenue of $1.5 million and employing a staff of 50 individuals. In order to operate the business efficiently, they need a website with a robust database backend for the purpose of recording sales orders for products to customers. This system will facilitate the tracking of more than 100,000 sales transactions each year, helping to analyze sales patterns, customer preferences, and identification of potential product additions, ultimately leading to improved customer service and continued growth in their highly competitive market.  
@@ -54,11 +55,46 @@ ExpressMart is a grocery store with an annual revenue of $1.5 million and employ
 
 * **Maria Database walkthrough** - This database was designed and normalized on the first sprint using mysql on Maria Database through a server. All pages' CRUDs interact with this databse through our server code in app.js, frontend implementations in handlebar files as well as backend js files. 
 <img src='./assets/database.gif'/>
- 
+
+## Installation
+
+### Prerequisites
+- Node.js (version 12 or higher)
+- MariaDB or MySQL
+
+### Steps
+1. **Clone the Repository**:
+   ```sh
+   git clone https://github.com/your-repo/express-mart.git
+   cd express-mart
+   ```
+2. **Install Dependencies**:
+    ```sh
+    npm install
+    ```
+3. **Set Up Environment Variables**:
+Create a `.env` file in the root directory of the project and add the following environment variables:
+    ```sh
+    DB_HOST=localhost
+    DB_USER=your_username
+    DB_PASSWORD=your_password
+    DB_DATABASE=express_mart
+    ```
+4. **Set Up the Database**:
+- Ensure your MariaDB or MySQL server is running.
+- Import the database schema and data:
+    ```sh
+    mysql -u your_username -p express_mart < path/to/DDL.sql
+    mysql -u your_username -p express_mart < path/to/DML.sql
+    ```
+5. Start the Application:
+    ```sh
+    npm start
+    ```
+
 ## Citation
  
 - The code structure is derived from the [Node.js Starter Guide](https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/) provided by CS340 at Oregon State University. Code and comments have been adapted from this repository.
- 
  
 - The conversion of date to string format "yyyy-mm-dd" is based on a solution found on Stack Overflow by user user3364059 and edited by user [NXT](https://stackoverflow.com/users/1554649/nxt). The original answer can be found [here](https://stackoverflow.com/questions/15411833/using-moment-js-to-convert-date-to-string-mm-dd-yyyy).
 
