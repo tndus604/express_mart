@@ -2,7 +2,6 @@
  
 The project involves the development of a web-based user interface (UI) designed to facilitate Create-Read-Update-Delete (CRUD) functionalities. The UI is built using Node.js and Handlebars, serving content over the web. The backend is powered by an SQL-driven database.
 
-**Deployed website**: [Express Mart](https://protected-springs-63804-e1c900eb8ffa.herokuapp.com/)
  
 ## Authors
  
